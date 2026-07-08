@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-books e Apostilas - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>📖 E-books e Apostilas Gratuitas</h2>
+    <p>Acesse materiais didáticos completos para todas as matérias</p>
+</section>
+
+<section class="biblioteca-section">
+    <div class="tabs-materias">
+        <button class="tab-btn active" onclick="alterarMateria('tudo')">Todas as Matérias</button>
+        <button class="tab-btn" onclick="alterarMateria('matematica')">Matemática</button>
+        <button class="tab-btn" onclick="alterarMateria('portugues')">Português</button>
+        <button class="tab-btn" onclick="alterarMateria('historia')">História</button>
+        <button class="tab-btn" onclick="alterarMateria('ciencias')">Ciências</button>
+        <button class="tab-btn" onclick="alterarMateria('geografia')">Geografia</button>
+    </div>
+
+    <!-- APOSTILAS EM PDF -->
+    <h2 style="margin-top: 3rem; color: #667eea;">📚 Apostilas em PDF</h2>
+    
+    <div class="materiais-grid">
+        <!-- Matemática -->
+        <div class="material-card" data-materia="matematica">
+            <div class="material-icon">📐</div>
+            <h3>Fundamentos de Matemática</h3>
+            <p>Apostila completa com todos os conceitos básicos de matemática</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-matematica-basico.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="matematica">
+            <div class="material-icon">📐</div>
+            <h3>Álgebra Avançada</h3>
+            <p>Equações, sistemas lineares, polinômios e muito mais</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-algebra.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="matematica">
+            <div class="material-icon">📐</div>
+            <h3>Geometria Euclidiana</h3>
+            <p>Triângulos, círculos, polígonos e teoremas importantes</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-geometria.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <!-- Português -->
+        <div class="material-card" data-materia="portugues">
+            <div class="material-icon">📖</div>
+            <h3>Gramática Portuguesa Completa</h3>
+            <p>Classes de palavras, orações, pontuação e regras ortográficas</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-gramatica.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="portugues">
+            <div class="material-icon">📖</div>
+            <h3>Literatura Brasileira</h3>
+            <p>Escolas literárias, autores clássicos e obras importantes</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-literatura-br.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="portugues">
+            <div class="material-icon">📖</div>
+            <h3>Redação e Produção de Texto</h3>
+            <p>Técnicas, gêneros textuais e exercícios práticos</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-redacao.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <!-- História -->
+        <div class="material-card" data-materia="historia">
+            <div class="material-icon">📚</div>
+            <h3>História do Brasil</h3>
+            <p>Do descobrimento à república: cronologia e eventos principais</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-historia-brasil.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="historia">
+            <div class="material-icon">📚</div>
+            <h3>História Geral</h3>
+            <p>Civilizações antigas, Idade Média, Moderna e Contemporânea</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-historia-geral.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="historia">
+            <div class="material-icon">📚</div>
+            <h3>Revoluções e Movimentos Sociais</h3>
+            <p>Revolução Francesa, Industrial, comunismo, anarquismo</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-revolucoes.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <!-- Ciências -->
+        <div class="material-card" data-materia="ciencias">
+            <div class="material-icon">🧪</div>
+            <h3>Física Fundamental</h3>
+            <p>Mecânica, termodinâmica, ondulatória e óptica</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-fisica.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="ciencias">
+            <div class="material-icon">🧪</div>
+            <h3>Química Inorgânica</h3>
+            <p>Elementos, compostos, reações e tabela periódica</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-quimica.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="ciencias">
+            <div class="material-icon">🧪</div>
+            <h3>Biologia Celular</h3>
+            <p>Células, genética, evolução e ecologia</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-biologia.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <!-- Geografia -->
+        <div class="material-card" data-materia="geografia">
+            <div class="material-icon">🌍</div>
+            <h3>Geografia Física</h3>
+            <p>Clima, solos, biomas, relevo e recursos naturais</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-geografia-fisica.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="geografia">
+            <div class="material-icon">🌍</div>
+            <h3>Geografia Política</h3>
+            <p>Países, fronteiras, política internacional e geopolítica</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-geografia-politica.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="geografia">
+            <div class="material-icon">🌍</div>
+            <h3>Geografia do Brasil</h3>
+            <p>Região, divisão política, economia e população brasileira</p>
+            <span class="tipo-badge pdf">PDF</span>
+            <button class="botao-download" onclick="downloadArquivo('apostila-geografia-brasil.pdf')">
+                📥 Download
+            </button>
+        </div>
+    </div>
+
+    <!-- E-BOOKS -->
+    <h2 style="margin-top: 3rem; color: #667eea;">📕 E-books Recomendados</h2>
+    
+    <div class="materiais-grid">
+        <div class="material-card" data-materia="matematica">
+            <div class="material-icon">📕</div>
+            <h3>O Homem que Calculava</h3>
+            <p>Clássico matemático contando a história de um calculista persa</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Malba Tahan</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-homem-calculava.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="portugues">
+            <div class="material-icon">📕</div>
+            <h3>Dom Casmurro</h3>
+            <p>Romance clássico de Machado de Assis - Literatura brasileira</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Machado de Assis</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-dom-casmurro.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="historia">
+            <div class="material-icon">📕</div>
+            <h3>A História da Humanidade</h3>
+            <p>Visão panorâmica de toda a história humana em um volume</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Hendrik Willem van Loon</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-historia-humanidade.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="ciencias">
+            <div class="material-icon">📕</div>
+            <h3>Uma Breve História do Tempo</h3>
+            <p>Cosmologia e física quântica explicadas de forma acessível</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Stephen Hawking</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-breve-historia-tempo.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="geografia">
+            <div class="material-icon">📕</div>
+            <h3>Guns, Germs, and Steel</h3>
+            <p>Como a geografia moldou a história da humanidade</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Jared Diamond</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-guns-germs-steel.pdf')">
+                📥 Download
+            </button>
+        </div>
+
+        <div class="material-card" data-materia="tudo">
+            <div class="material-icon">📕</div>
+            <h3>Enciclopédia do Conhecimento</h3>
+            <p>Referência completa com tópicos de todas as matérias</p>
+            <span class="tipo-badge ebook">E-BOOK</span>
+            <p style="color: #999; font-size: 0.9rem;">Autor: Vários</p>
+            <button class="botao-download" onclick="downloadArquivo('ebook-enciclopedia.pdf')">
+                📥 Download
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+function alterarMateria(materia) {
+    // Atualizar botões ativos
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    // Filtrar cards
+    const cards = document.querySelectorAll('.material-card');
+    cards.forEach(card => {
+        if (materia === 'tudo' || card.dataset.materia === materia) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function downloadArquivo(nomeArquivo) {
+    alert(`📥 Download iniciado: ${nomeArquivo}\n\nEm um ambiente real, este arquivo seria baixado agora!\n\n✅ Material disponível para estudo!`);
+    // Em produção, aqui haveria um link real de download
+}
+</script>
+
+<style>
+.tabs-materias {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: #f0f0f0;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.material-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.material-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.material-card h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.material-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.tipo-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.tipo-badge.pdf {
+    background: #ffe0e0;
+    color: #d32f2f;
+}
+
+.tipo-badge.ebook {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.botao-download {
+    width: 100%;
+    background: #51cf66;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.botao-download:hover {
+    background: #40c057;
+}
+
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+body.dark-mode .material-card {
+    background: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.dark-mode .material-card h3 {
+    color: #667eea;
+}
+
+body.dark-mode .material-card p {
+    color: #b0b0b0;
+}
+</style>
+</body>
+</html>

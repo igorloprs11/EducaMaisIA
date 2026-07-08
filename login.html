@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="ebooks-apostilas.html">📖 E-books</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="login.html">Entrar</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>Faça Login</h2>
+    <p>Acesse sua conta e continue aprendendo</p>
+</section>
+
+<form onsubmit="enviarLogin(event)">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
+
+    <button type="submit" class="botao" style="width: 100%;">Entrar</button>
+
+    <p style="text-align: center; margin-top: 1rem;">
+        Não tem conta? <a href="cadastro.html" style="color: #667eea; text-decoration: none;">Cadastre-se aqui</a>
+    </p>
+
+    <div style="background: #f0f0f0; padding: 1rem; margin-top: 1rem; border-radius: 4px; font-size: 0.85rem;">
+        <p><strong>Demo - Teste Agora:</strong></p>
+        <p>Email: <code>joao@email.com</code></p>
+        <p>Senha: <code>123456</code></p>
+    </div>
+</form>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

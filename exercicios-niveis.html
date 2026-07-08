@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios com Níveis - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .questao-unica { max-width: 700px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .progresso-bar { width: 100%; height: 8px; background: #ddd; border-radius: 4px; margin: 1rem 0; overflow: hidden; }
+        .progresso-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s ease; }
+        .msg-limite { background: #ffe066; border-left: 4px solid #ff922b; padding: 1rem; border-radius: 4px; margin: 2rem 0; }
+        .msg-sucesso { background: #51cf66; border-left: 4px solid #37b24d; padding: 1rem; border-radius: 4px; margin: 2rem 0; color: white; }
+        .msg-erro { background: #ff6b6b; border-left: 4px solid #ff5252; padding: 1rem; border-radius: 4px; margin: 2rem 0; color: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="exercicios-section">
+        <h2>📝 Exercícios - Uma Questão por Vez</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+            <strong>🎯 Tente quantas vezes precisar!</strong> | 
+            <strong>📚 Exercite seus conhecimentos sem limites!</strong>
+            <div>
+                <label for="materia-select">Selecione a Matéria:</label>
+                <select id="materia-select" onchange="carregarQuestoes()">
+                    <option value="">-- Escolha uma matéria --</option>
+                    <option value="matematica">Matemática</option>
+                    <option value="portugues">Português</option>
+                    <option value="historia">História</option>
+                    <option value="ciencias">Ciências</option>
+                    <option value="geografia">Geografia</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="nivel-select">Selecione o Nível:</label>
+                <select id="nivel-select" onchange="carregarQuestoes()">
+                    <option value="">-- Escolha um nível --</option>
+                    <option value="facil">⭐ Fácil (5 pontos)</option>
+                    <option value="medio">⭐⭐ Médio (10 pontos)</option>
+                    <option value="dificil">⭐⭐⭐ Difícil (15 pontos)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="questoes-container"></div>
+    </section>
+
+<footer>
+    <p>&copy; 2024 EducaMais IA. Todos os direitos reservados.</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/questoes.js"></script>
+<script>
+let questoesAtuais = [];
+let indiceAtual = 0;
+let questaoAcertada = false;
+
+function carregarQuestoes() {
+    if (!sistema.usuarioLogado) {
+        alert('❌ Você precisa estar logado!');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const materia = document.getElementById('materia-select').value;
+    const nivel = document.getElementById('nivel-select').value;
+    const container = document.getElementById('questoes-container');
+
+    if (!materia || !nivel) {
+        container.innerHTML = '';
+        indiceAtual = 0;
+        questaoAcertada = false;
+        return;
+    }
+
+    const hoje = new Date().toISOString().split('T')[0];
+    const chaveArmazenamento = `questoes_${materia}_${hoje}`;
+    const questoesRespondidas = parseInt(localStorage.getItem(chaveArmazenamento) || '0');
+
+
+    questoesAtuais = [...bancoDadosQuestoes[materia][nivel]];
+    questoesAtuais = questoesAtuais.sort(() => Math.random() - 0.5);
+    indiceAtual = 0;
+    questaoAcertada = false;
+
+    mostrarProximaQuestao(materia, nivel);
+}
+
+function mostrarProximaQuestao(materia, nivel) {
+    const container = document.getElementById('questoes-container');
+
+    if (indiceAtual >= questoesAtuais.length) {
+        container.innerHTML = `
+            <div class="questao-unica">
+                <div class="msg-sucesso">
+                    <h3>🎉 Parabéns!</h3>
+                    <p>Você resolveu <strong>${indiceAtual}</strong> questões nesta sessão.</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: white; color: #51cf66; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                        Fazer Outro
+                    </button>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    const questao = questoesAtuais[indiceAtual];
+    const pontos = nivel === 'facil' ? 5 : nivel === 'medio' ? 10 : 15;
+    const progresso = indiceAtual + 1;
+    const percentualProgresso = (indiceAtual / Math.min(questoesAtuais.length, 15)) * 100;
+
+    let html = `
+        <div class="questao-unica">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div>
+                    <strong>Questão ${progresso}</strong><br>
+                    <small style="color: #999;">${materia} - ${nivel}</small>
+                </div>
+                <span class="pontos-badge">+${pontos} pts</span>
+            </div>
+
+            <div class="progresso-bar">
+                <div class="progresso-fill" style="width: ${percentualProgresso}%;"></div>
+            </div>
+
+            <p class="questao-pergunta">${questao.pergunta}</p>
+            
+            <div class="questao-opcoes">
+                ${questao.opcoes.map((opcao, idx) => `
+                    <label class="opcao-label">
+                        <input type="radio" name="resposta" value="${opcao}" ${questaoAcertada ? 'disabled' : ''}>
+                        <span>${opcao}</span>
+                    </label>
+                `).join('')}
+            </div>
+
+            <button id="btn-verificar" onclick="verificarResposta('${questao.respostaCorreta}', '${questao.explicacao.replace(/'/g, "\\'")}', ${pontos}, '${materia}', '${nivel}')" 
+                    class="botao"
+                    style="width: 100%; padding: 0.75rem; margin-top: 1.5rem;">
+                Verificar Resposta
+            </button>
+
+            <div id="resultado" style="display: none; margin-top: 1.5rem;"></div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+function verificarResposta(respostaCorreta, explicacao, pontos, materia, nivel) {
+    const selecionada = document.querySelector('input[name="resposta"]:checked');
+    const resultadoDiv = document.getElementById('resultado');
+
+    if (!selecionada) {
+        resultadoDiv.style.display = 'block';
+        resultadoDiv.innerHTML = '<div class="msg-erro"><strong>Selecione uma resposta!</strong></div>';
+        return;
+    }
+
+    questaoAcertada = true;
+    document.getElementById('btn-verificar').disabled = true;
+    document.querySelectorAll('input[name="resposta"]').forEach(input => {
+        input.disabled = true;
+    });
+
+    resultadoDiv.style.display = 'block';
+
+    if (selecionada.value === respostaCorreta) {
+        // ✅ ACERTOU
+        sistema.adicionarPontos(sistema.usuarioLogado.email, pontos);
+        
+        resultadoDiv.innerHTML = `
+            <div class="msg-sucesso">
+                <strong>✅ Correto! +${pontos} pontos</strong><br><br>
+                <em>${explicacao}</em><br><br>
+                <button onclick="proximaQuestao('${materia}', '${nivel}')" style="margin-top: 1rem; padding: 0.5rem 1rem; background: white; color: #51cf66; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                    Próxima Questão →
+                </button>
+            </div>
+        `;
+        
+        setTimeout(() => {
+            sistema.atualizarUILogin();
+        }, 500);
+    } else {
+        // ❌ ERROU - Permite tentar novamente
+        resultadoDiv.innerHTML = `
+            <div class="msg-erro">
+                <strong>❌ Incorreto!</strong><br><br>
+                <em>Tente novamente ou clique em "Próxima" para ver a resposta correta.</em><br><br>
+                <button onclick="proximaQuestao('${materia}', '${nivel}')" style="margin-top: 1rem; padding: 0.5rem 1rem; background: white; color: #ff6b6b; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                    Ver Resposta Correta →
+                </button>
+            </div>
+        `;
+    }
+}
+
+function proximaQuestao(materia, nivel) {
+    indiceAtual++;
+    questaoAcertada = false;
+    mostrarProximaQuestao(materia, nivel);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    sistema.atualizarUILogin();
+});
+</script>
+</body>
+</html>

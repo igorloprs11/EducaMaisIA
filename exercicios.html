@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios.html">Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>Exercícios Interativos</h2>
+    <p>Teste seus conhecimentos e aprenda praticando</p>
+</section>
+
+<section class="exercicios-container">
+    <div class="exercicio">
+        <h3>Exercício 1: Português</h3>
+        <p><strong>Pergunta:</strong> Qual é o plural de "pão"?</p>
+        <label><input type="radio" name="ex1" value="a"> a) Pãos</label>
+        <label><input type="radio" name="ex1" value="b"> b) Pães</label>
+        <label><input type="radio" name="ex1" value="c"> c) Pão</label>
+        <button class="botao" onclick="verificarResposta(1, 'b')">Verificar</button>
+        <div id="resultado1"></div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 2: Matemática</h3>
+        <p><strong>Pergunta:</strong> Quanto é 15 × 4?</p>
+        <label><input type="radio" name="ex2" value="a"> a) 50</label>
+        <label><input type="radio" name="ex2" value="b"> b) 60</label>
+        <label><input type="radio" name="ex2" value="c"> c) 70</label>
+        <button class="botao" onclick="verificarResposta(2, 'b')">Verificar</button>
+        <div id="resultado2"></div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 3: História</h3>
+        <p><strong>Pergunta:</strong> Em que ano o Brasil foi descoberto?</p>
+        <label><input type="radio" name="ex3" value="a"> a) 1492</label>
+        <label><input type="radio" name="ex3" value="b"> b) 1500</label>
+        <label><input type="radio" name="ex3" value="c"> c) 1508</label>
+        <button class="botao" onclick="verificarResposta(3, 'b')">Verificar</button>
+        <div id="resultado3"></div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 4: Ciências</h3>
+        <p><strong>Pergunta:</strong> Qual é o elemento químico com símbolo "O"?</p>
+        <label><input type="radio" name="ex4" value="a"> a) Ouro</label>
+        <label><input type="radio" name="ex4" value="b"> b) Oxigênio</label>
+        <label><input type="radio" name="ex4" value="c"> c) Osmio</label>
+        <button class="botao" onclick="verificarResposta(4, 'b')">Verificar</button>
+        <div id="resultado4"></div>
+    </div>
+
+    <div class="exercicio">
+        <h3>Exercício 5: Geografia</h3>
+        <p><strong>Pergunta:</strong> Qual é a capital da França?</p>
+        <label><input type="radio" name="ex5" value="a"> a) Lyon</label>
+        <label><input type="radio" name="ex5" value="b"> b) Marselha</label>
+        <label><input type="radio" name="ex5" value="c"> c) Paris</label>
+        <button class="botao" onclick="verificarResposta(5, 'c')">Verificar</button>
+        <div id="resultado5"></div>
+    </div>
+</section>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+function verificarResposta(numero, respostaCorreta) {
+    const selecionada = document.querySelector(`input[name="ex${numero}"]:checked`);
+    const resultado = document.getElementById(`resultado${numero}`);
+    
+    if (!selecionada) {
+        resultado.innerHTML = '❌ Selecione uma resposta!';
+        resultado.style.color = '#ff6b6b';
+        return;
+    }
+    
+    if (selecionada.value === respostaCorreta) {
+        resultado.innerHTML = '✅ Resposta correta!';
+        resultado.style.color = '#51cf66';
+    } else {
+        resultado.innerHTML = '❌ Resposta incorreta! Tente novamente.';
+        resultado.style.color = '#ff6b6b';
+    }
+}
+</script>
+</body>
+</html>
