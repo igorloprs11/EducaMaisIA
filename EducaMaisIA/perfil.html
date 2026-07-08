@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="ebooks-apostilas.html">📖 E-books</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>👤 Meu Perfil</h2>
+    <p>Acompanhe seu desempenho e progresso</p>
+</section>
+
+<section class="perfil-container">
+    <div id="conteudo-perfil" style="display: none;">
+        <div class="card-perfil">
+            <h3>📋 Informações Pessoais</h3>
+            <div class="info-perfil">
+                <p><strong>Nome:</strong> <span id="nome-usuario"></span></p>
+                <p><strong>Email:</strong> <span id="email-usuario"></span></p>
+                <p><strong>Data de Cadastro:</strong> <span id="data-usuario"></span></p>
+            </div>
+        </div>
+
+        <div class="card-perfil">
+            <h3>⭐ Estatísticas</h3>
+            <div class="stats-perfil">
+                <div class="stat-perfil">
+                    <h4>Pontos Totais</h4>
+                    <p class="numero" id="pontos-total">0</p>
+                </div>
+                <div class="stat-perfil">
+                    <h4>Questões Resolvidas</h4>
+                    <p class="numero" id="questoes-total">0</p>
+                </div>
+                <div class="stat-perfil">
+                    <h4>Pontos por Questão</h4>
+                    <p class="numero">10</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-perfil">
+            <h3>📊 Minha Posição</h3>
+            <div class="posicao-ranking">
+                <h2 id="posicao-ranking">1º lugar</h2>
+                <p id="mensagem-posicao">Parabéns! Você está em primeiro lugar! 🏆</p>
+            </div>
+        </div>
+
+        <div class="card-perfil">
+            <h3>🎯 Próximas Metas</h3>
+            <div class="metas">
+                <div class="meta">
+                    <p>Resolver 10 questões: <span id="meta-10">0/10</span></p>
+                    <div class="barra-progresso">
+                        <div class="progresso" id="prog-10" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="meta">
+                    <p>Alcançar 100 pontos: <span id="meta-100">0/100</span></p>
+                    <div class="barra-progresso">
+                        <div class="progresso" id="prog-100" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="meta">
+                    <p>Alcançar 500 pontos: <span id="meta-500">0/500</span></p>
+                    <div class="barra-progresso">
+                        <div class="progresso" id="prog-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="botao botao-logout" onclick="sistema.logout(); location.href='index.html';" style="margin-top: 2rem;">
+            🚪 Fazer Logout
+        </button>
+    </div>
+
+    <div id="conteudo-nao-logado" class="card-vazio">
+        <h3>❌ Você não está logado</h3>
+        <p>Faça login ou cadastre-se para acessar seu perfil</p>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="login.html" class="botao">Entrar</a>
+            <a href="cadastro.html" class="botao">Cadastrar</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (sistema.usuarioLogado) {
+        // Usuário logado - mostrar perfil
+        document.getElementById('conteudo-perfil').style.display = 'block';
+        document.getElementById('conteudo-nao-logado').style.display = 'none';
+
+        const usuario = sistema.usuarioLogado;
+
+        // Preencher informações
+        document.getElementById('nome-usuario').textContent = usuario.nome;
+        document.getElementById('email-usuario').textContent = usuario.email;
+        document.getElementById('data-usuario').textContent = usuario.dataCadastro;
+        document.getElementById('pontos-total').textContent = usuario.pontos + ' ⭐';
+        document.getElementById('questoes-total').textContent = usuario.questoesResolvidas || 0;
+
+        // Calcular posição no ranking
+        const ranking = sistema.obterRanking();
+        const posicao = ranking.findIndex(u => u.email === usuario.email) + 1;
+        
+        document.getElementById('posicao-ranking').textContent = posicao + 'º lugar';
+        
+        if (posicao === 1) {
+            document.getElementById('mensagem-posicao').textContent = '🏆 Parabéns! Você está em primeiro lugar!';
+        } else {
+            const pontosProximo = ranking[posicao - 2]?.pontos || 0;
+            const diferenca = pontosProximo - usuario.pontos;
+            document.getElementById('mensagem-posicao').textContent = 
+                `Faltam ${diferenca} pontos para ultrapassar o ${posicao - 1}º lugar!`;
+        }
+
+        // Atualizar metas
+        const questoes = usuario.questoesResolvidas || 0;
+        const pontos = usuario.pontos;
+
+        document.getElementById('meta-10').textContent = `${Math.min(questoes, 10)}/10`;
+        document.getElementById('prog-10').style.width = Math.min((questoes / 10) * 100, 100) + '%';
+
+        document.getElementById('meta-100').textContent = `${Math.min(pontos, 100)}/100`;
+        document.getElementById('prog-100').style.width = Math.min((pontos / 100) * 100, 100) + '%';
+
+        document.getElementById('meta-500').textContent = `${Math.min(pontos, 500)}/500`;
+        document.getElementById('prog-500').style.width = Math.min((pontos / 500) * 100, 100) + '%';
+    } else {
+        // Usuário não logado
+        document.getElementById('conteudo-perfil').style.display = 'none';
+        document.getElementById('conteudo-nao-logado').style.display = 'block';
+    }
+});
+</script>
+</body>
+</html>

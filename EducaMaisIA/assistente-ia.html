@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente IA - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>🤖 Assistente IA</h2>
+    <p>Faça suas perguntas e tire suas dúvidas com a IA Educadora</p>
+</section>
+
+<section class="assistente-container">
+    <div class="ia-info">
+        <h3>💡 Como Funciona</h3>
+        <p>Faça perguntas sobre:</p>
+        <ul>
+            <li>📐 <strong>Matemática</strong> - Equações, cálculos, geometria</li>
+            <li>📖 <strong>Português</strong> - Gramática, literatura, redação</li>
+            <li>📚 <strong>História</strong> - Períodos históricos, eventos</li>
+            <li>🧪 <strong>Ciências</strong> - Física, química, biologia</li>
+            <li>🌍 <strong>Geografia</strong> - Países, continentes, clima</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: #999;">Exemplo: "Como resolver uma equação do 2º grau?" ou "Qual é a diferença entre metáfora e símile?"</p>
+    </div>
+
+    <div class="chat-container">
+        <div id="chat-assistente" class="chat-messages">
+            <div class="mensagem-ia">
+                <strong>🤖 IA:</strong> Olá! Sou a IA Educadora. Como posso te ajudar? 😊
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input 
+                type="text" 
+                id="input-assistente" 
+                placeholder="Digite sua pergunta..." 
+                class="input-chat"
+            >
+            <button class="botao" onclick="enviarMensagemAssistente()">Enviar</button>
+        </div>
+    </div>
+
+    <div class="dicas-ia">
+        <h3>🎯 Dicas Úteis</h3>
+        <div class="dica">
+            <p><strong>Saudação:</strong> "Olá" ou "Oi" para começar</p>
+        </div>
+        <div class="dica">
+            <p><strong>Específico:</strong> Faça perguntas bem definidas para respostas melhores</p>
+        </div>
+        <div class="dica">
+            <p><strong>Contextual:</strong> Mencione a matéria na sua pergunta</p>
+        </div>
+        <div class="dica">
+            <p><strong>Educativa:</strong> A IA sempre tenta ajudar você a aprender</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/questoes.js"></script>
+</body>
+</html>

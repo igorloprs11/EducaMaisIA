@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking - EducaMais IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>📚 EducaMais IA</h1>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="biblioteca.html">Biblioteca</a>
+        <a href="exercicios-niveis.html">📝 Exercícios</a>
+        <a href="ranking.html">🏆 Ranking</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="assistente-ia.html">🤖 IA</a>
+        <a href="ebooks-apostilas.html">📖 E-books</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <div id="container-login-cadastro">
+            <a href="login.html" class="link-auth">Entrar</a>
+            <a href="cadastro.html" class="link-auth">Cadastro</a>
+        </div>
+        <div id="container-usuario-logado" style="display: none; align-items: center; gap: 1rem;"></div>
+    </nav>
+</header>
+
+<section class="banner">
+    <h2>🏆 Ranking de Pontos</h2>
+    <p>Veja quem está em primeiro lugar!</p>
+</section>
+
+<section class="ranking-container">
+    <h2>Top Usuários</h2>
+    <table class="tabela-ranking">
+        <thead>
+            <tr>
+                <th>🏅 Posição</th>
+                <th>👤 Nome</th>
+                <th>⭐ Pontos</th>
+                <th>📊 Questões</th>
+                <th>📅 Data</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-ranking">
+            <!-- Preenchido por JavaScript -->
+        </tbody>
+    </table>
+</section>
+
+<section class="stats-ranking">
+    <div class="stat-ranking">
+        <h3>Total de Usuários</h3>
+        <p id="total-usuarios">0</p>
+    </div>
+    <div class="stat-ranking">
+        <h3>Maior Pontuação</h3>
+        <p id="maior-pontuacao">0 pts</p>
+    </div>
+    <div class="stat-ranking">
+        <h3>Média de Pontos</h3>
+        <p id="media-pontos">0 pts</p>
+    </div>
+</section>
+
+<footer>
+    Projeto desenvolvido para TCC © 2026
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ranking = sistema.obterRanking();
+    const tbody = document.getElementById('corpo-ranking');
+    
+    // Preencher tabela de ranking
+    ranking.forEach(usuario => {
+        const tr = document.createElement('tr');
+        let medalha = '🥇';
+        if (usuario.posicao === 2) medalha = '🥈';
+        if (usuario.posicao === 3) medalha = '🥉';
+        
+        tr.innerHTML = `
+            <td><strong>${medalha} ${usuario.posicao}º</strong></td>
+            <td>${usuario.nome}</td>
+            <td><strong>${usuario.pontos} ⭐</strong></td>
+            <td>${usuario.questoesResolvidas || 0}</td>
+            <td>${usuario.dataCadastro}</td>
+        `;
+        
+        // Destacar usuário logado
+        if (sistema.usuarioLogado && usuario.email === sistema.usuarioLogado.email) {
+            tr.style.background = 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)';
+            tr.style.color = 'white';
+            tr.style.fontWeight = 'bold';
+        }
+        
+        tbody.appendChild(tr);
+    });
+    
+    // Estatísticas
+    document.getElementById('total-usuarios').textContent = sistema.usuarios.length;
+    const maiorPonto = Math.max(...sistema.usuarios.map(u => u.pontos));
+    document.getElementById('maior-pontuacao').textContent = maiorPonto + ' ⭐';
+    const mediapontos = Math.round(sistema.usuarios.reduce((a, b) => a + b.pontos, 0) / sistema.usuarios.length);
+    document.getElementById('media-pontos').textContent = mediapontos + ' ⭐';
+});
+</script>
+</body>
+</html>
